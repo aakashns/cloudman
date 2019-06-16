@@ -1,0 +1,12 @@
+{
+  "@type": "type.googleapis.com/google.cloudresourcemanager.v1.Project",
+  "createTime": "2019-06-16T20:23:24.631Z",
+  "lifecycleState": "ACTIVE",
+  "name": "jigsaw-2019",
+  "parent": {
+    "id": "234004303262",
+    "type": "organization"
+  },
+  "projectId": "jigsaw-2019",
+  "projectNumber": "296558216672"
+}

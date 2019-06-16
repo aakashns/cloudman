@@ -1,0 +1,39 @@
+name: cloudman
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - astroid=1.6.5
+  - autopep8=1.4.4
+  - backports=1.0
+  - backports.functools_lru_cache=1.5
+  - certifi=2019.3.9
+  - configparser=3.7.4
+  - enum34=1.1.6
+  - fire=0.1.3
+  - futures=3.2.0
+  - isort=4.3.20
+  - lazy-object-proxy=1.4.1
+  - libcxx=4.0.1
+  - libcxxabi=4.0.1
+  - libedit=3.1.20181209
+  - libffi=3.2.1
+  - mccabe=0.6.1
+  - ncurses=6.1
+  - pip=19.1.1
+  - pycodestyle=2.5.0
+  - pylint=1.9.2
+  - python=2.7.16
+  - readline=7.0
+  - setuptools=41.0.1
+  - singledispatch=3.4.0.3
+  - six=1.12.0
+  - sqlite=3.28.0
+  - tk=8.6.8
+  - wheel=0.33.4
+  - wrapt=1.11.1
+  - zlib=1.2.11
+  - pip:
+    - termcolor==1.1.0
+prefix: /usr/local/anaconda3/envs/cloudman
+
