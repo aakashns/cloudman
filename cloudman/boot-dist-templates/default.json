@@ -1,0 +1,5 @@
+{
+  "disk-size": "50GB",
+  "os": "ubuntu-1804-lts",
+  "setup-script-url": "https://raw.githubusercontent.com/arunoda/fastai-shell/master/setup-gce.sh"
+}
