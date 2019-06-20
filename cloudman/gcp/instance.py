@@ -29,15 +29,17 @@ def delete_instance(name):
     return run('compute instances delete ' + name + ' --zone=us-west1-b -q')
 
 
-def create_instance(name, machine, gpu, spot=True):
+def create_instance(name, machine, gpu, gpucount=1, spot=True):
     """Create an instance for the given boot disk"""
     log("Starting an instance for '" + name +
         "' with machine type '" + machine + "' and GPU type '" + gpu + "'")
     # Network, firewall & boot instance name
     network, _, boot = derive_names(name)
     # GPU config
-    gpu_arg = '' if gpu == 'nogpu' else '--accelerator="type={0},count=1"'.format(
-        gpu)
+    if gpu == 'nogpu':
+        gpu_arg = ''
+    else:
+        gpu_arg = '--accelerator="type={0},count={1}"'.format(gpu, gpucount)
     # Preemptible config
     spot_arg = '--preemptible' if spot else ''
     # Construct & run the command

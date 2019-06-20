@@ -18,8 +18,8 @@ class CLI(object):
     def list(self):
         gcp.list_disks()
 
-    def start(self, name, gpu='nogpu', machine='auto', spot=True):
-        gcp.start(name, gpu, machine, spot)
+    def start(self, name, gpu='nogpu', machine='auto', gpucount=1, spot=True):
+        gcp.start(name, gpu, machine, gpucount, spot)
 
     def stop(self, name):
         gcp.stop(name)

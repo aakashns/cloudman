@@ -70,7 +70,7 @@ def list_disks():
     run_plain('gcloud compute instances list')
 
 
-def start(name, gpu='nogpu', machine='auto', spot=True):
+def start(name, gpu='nogpu', machine='auto', gpucount=1, spot=True):
     # Check if exists
     if has_instance(name):
         # Log and skip creation
@@ -79,7 +79,7 @@ def start(name, gpu='nogpu', machine='auto', spot=True):
     else:
         # Get GCP types and create machine
         gpu, machine = resolve_gpu_machine(gpu, machine)
-        create_instance(name, machine, gpu, spot)
+        create_instance(name, machine, gpu, gpucount, spot)
     # Print Jupyter URL
     ext_ip = get_instance_ip(name)
     jupyter_url = "http://" + ext_ip + ":8080"

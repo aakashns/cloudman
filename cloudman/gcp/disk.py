@@ -16,4 +16,4 @@ def has_disk(name):
 def delete_disk(name):
     """Delete a disk"""
     log("Deleting disk '" + name + "'. This may take a while...", prefix=True)
-    return run('compute disks delete ' + name)
+    return run('compute disks delete ' + name + " --zone=us-west1-b")
