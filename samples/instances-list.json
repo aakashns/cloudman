@@ -1,0 +1,89 @@
+[
+  {
+    "canIpForward": false,
+    "cpuPlatform": "Intel Broadwell",
+    "creationTimestamp": "2019-06-19T06:16:27.919-07:00",
+    "deletionProtection": false,
+    "disks": [
+      {
+        "autoDelete": false,
+        "boot": true,
+        "deviceName": "a-sample-device",
+        "guestOsFeatures": [
+          {
+            "type": "VIRTIO_SCSI_MULTIQUEUE"
+          }
+        ],
+        "index": 0,
+        "interface": "SCSI",
+        "kind": "compute#attachedDisk",
+        "licenses": [
+          "https://www.googleapis.com/compute/v1/projects/ubuntu-os-cloud/global/licenses/ubuntu-1804-lts"
+        ],
+        "mode": "READ_WRITE",
+        "source": "https://www.googleapis.com/compute/v1/projects/a-project/zones/us-west1-b/disks/fastai-boot-1",
+        "type": "PERSISTENT"
+      }
+    ],
+    "guestAccelerators": [
+      {
+        "acceleratorCount": 1,
+        "acceleratorType": "https://www.googleapis.com/compute/v1/projects/a-project/zones/us-west1-b/acceleratorTypes/nvidia-tesla-k80"
+      }
+    ],
+    "id": "4950737581893",
+    "kind": "compute#instance",
+    "labelFingerprint": "42WmSpB8rSM=",
+    "machineType": "https://www.googleapis.com/compute/v1/projects/a-project/zones/us-west1-b/machineTypes/n1-standard-4",
+    "metadata": {
+      "fingerprint": "I7N36sHk9UU=",
+      "kind": "compute#metadata"
+    },
+    "name": "a-sample-device",
+    "networkInterfaces": [
+      {
+        "accessConfigs": [
+          {
+            "kind": "compute#accessConfig",
+            "name": "external-nat",
+            "natIP": "33.80.121.72",
+            "networkTier": "PREMIUM",
+            "type": "ONE_TO_ONE_NAT"
+          }
+        ],
+        "fingerprint": "pVQX0zrsf3AM=",
+        "kind": "compute#networkInterface",
+        "name": "nic0",
+        "network": "https://www.googleapis.com/compute/v1/projects/a-project/global/networks/fastai-net",
+        "networkIP": "10.130.0.4",
+        "subnetwork": "https://www.googleapis.com/compute/v1/projects/a-project/regions/us-west1/subnetworks/fastai-net"
+      }
+    ],
+    "scheduling": {
+      "automaticRestart": false,
+      "onHostMaintenance": "TERMINATE",
+      "preemptible": true
+    },
+    "selfLink": "https://www.googleapis.com/compute/v1/projects/a-project/zones/us-west1-b/instances/fastai-1",
+    "serviceAccounts": [
+      {
+        "email": "29656672-compute@developer.gserviceaccount.com",
+        "scopes": [
+          "https://www.googleapis.com/auth/devstorage.read_only",
+          "https://www.googleapis.com/auth/logging.write",
+          "https://www.googleapis.com/auth/monitoring.write",
+          "https://www.googleapis.com/auth/pubsub",
+          "https://www.googleapis.com/auth/service.management.readonly",
+          "https://www.googleapis.com/auth/servicecontrol",
+          "https://www.googleapis.com/auth/trace.append"
+        ]
+      }
+    ],
+    "startRestricted": false,
+    "status": "RUNNING",
+    "tags": {
+      "fingerprint": "42WmSprSM="
+    },
+    "zone": "https://www.googleapis.com/compute/v1/projects/a-project/zones/us-west1-b"
+  }
+]

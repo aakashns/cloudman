@@ -1,6 +1,6 @@
 import webbrowser
 from cloudman.utils.logger import log
-from cloudman.gcloud.utils import run
+from cloudman.gcp.utils import run
 from cloudman.utils.misc import attr
 
 

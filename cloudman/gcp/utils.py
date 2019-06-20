@@ -4,7 +4,7 @@ import time
 import json
 from cloudman.utils.misc import cmd_exists
 from cloudman.utils.logger import log
-from cloudman.gcloud.constants import GCLOUD_SDK_URL, POST_INSTALL_MSG
+from cloudman.gcp.constants import GCLOUD_SDK_URL, POST_INSTALL_MSG
 
 
 class GCPError(Exception):
@@ -52,6 +52,8 @@ def _e(cmd, rc, out):
 
 def run(cmd, safe=False):
     """Run a gcloud command"""
+    # Log the command
+    log(_c(cmd), prefix=True)
     # Create a child process
     task = subprocess.Popen(_c(cmd), shell=True, stdout=subprocess.PIPE)
     # Get the output & return code
@@ -83,15 +85,9 @@ def await_ssh(name, max_tries=200, sleep=2):
     raise GCPError('Failed to SSH to instance ' + name)
 
 
-def get_gpu(name):
-    """Get full GPU name from a valid shorthand.
-
-    See https://cloud.google.com/compute/docs/gpus/#introduction for a full list.
-    """
-    valid_names = ['t4', 'v100', 'p100', 'p4', 'k80']
-    if name in valid_names:
-        return "nvidia-tesla-" + name
-    raise GCPError("Invalid GPU type '" + name +
-                   "'. Choose one of:\n\t't4', 'v100', 'p100', 'p4', 'k80'\n\n" +
-                   "See https://cloud.google.com/compute/docs/gpus/#introduction " +
-                   "for more details about available GPUs.")
+def derive_names(name):
+    """Get name of network, firewall & boot instance from boot disk"""
+    network = name + '-network'
+    firewall = name + '-network-firewall-allow-all'
+    boot_instance = name + '-boot-instance'
+    return network, firewall, boot_instance

@@ -1,5 +1,5 @@
-from cloudman.gcloud.constants import DEFAULT_BOOT_CONFIG
-from cloudman.gcloud.utils import run, await_ssh
+from cloudman.gcp.constants import DEFAULT_BOOT_CONFIG
+from cloudman.gcp.utils import run, await_ssh
 from cloudman.utils.logger import log
 
 
@@ -30,11 +30,3 @@ def setup_boot_disk(name, config):
     -- "curl {1} > /tmp/setup.sh && bash /tmp/setup.sh \
     """.format(name, config['setup-script-url'])
     return run(cmd)
-
-
-def derive_names(name):
-    """Get name of network, firewall & boot instance from boot disk"""
-    network = name + '-network'
-    firewall = name + '-network-firewall-allow-all'
-    boot_instance = name + '-boot-instance'
-    return network, firewall, boot_instance

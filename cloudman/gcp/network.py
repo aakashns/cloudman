@@ -1,5 +1,5 @@
 from cloudman.utils.logger import log
-from cloudman.gcloud.utils import run
+from cloudman.gcp.utils import run
 
 
 def list_networks():
