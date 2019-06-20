@@ -1,6 +1,14 @@
 # cloudman
 
-Command line tool for managing single-purpose cloud VMs. Currently works with GCP
+Command line tool for managing single-purpose cloud VMs. Currently works with GCP.
+
+![cloudman-start-demo](https://i.imgur.com/g2DEBgN.gif)
+
+Features:
+
+1. Single command to provision cloud-based disk images with Ubuntu, NVIDIA drivers, Anaconda, PyTorch, FastAI and more..
+
+2. Single command to attach a disk image, launch a cloud VM instance with any configuration of CPUs, RAM and GPU, and start Jupyter notebook.
 
 ## Installation
 
