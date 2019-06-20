@@ -1,4 +1,3 @@
-import webbrowser
 from cloudman.utils.logger import log
 from cloudman.gcp.utils import run
 from cloudman.utils.misc import attr
@@ -27,11 +26,3 @@ def create_project(name):
     activate_project(name)
     # Log success
     log('GCP project ' + name + ' created and activate successfully!', prefix=True)
-
-
-def open_console(project):
-    """Open the GCP console for selected project"""
-    project = get_active_project() if not project else project
-    url = 'https://console.cloud.google.com/compute?project='+project
-    log('Opening ' + url)
-    webbrowser.open(url)

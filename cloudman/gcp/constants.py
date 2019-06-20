@@ -22,7 +22,7 @@ POST_INSTALL_MSG = """After installation:
 """
 
 DEFAULT_BOOT_CONFIG = {
-    'disk-size': '50GB',
+    'disk': '50GB',
     'os': "ubuntu-1804-lts",
     'setup-script-url': "https://raw.githubusercontent.com/arunoda/fastai-shell/master/setup-gce.sh"
 }
@@ -58,7 +58,7 @@ MACHINE_TYPES = [
     "n1-ultramem-80"
 ]
 
-GPU_TYPES = ['t4', 'v100', 'p100', 'p4', 'k80']
+GPU_TYPES = ['nogpu', 't4', 'v100', 'p100', 'p4', 'k80']
 
 GPU_DEFAULT_MACHINE = {
     't4': 'n1-standard-16',

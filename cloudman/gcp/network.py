@@ -23,4 +23,4 @@ def create_network(name):
 def delete_network(name):
     """Delete a networks with the given name"""
     log("Deleting network '" + name + "'. This may take a while...", prefix=True)
-    return run('compute networks delete ' + name)
+    return run('compute networks delete ' + name + ' -q')

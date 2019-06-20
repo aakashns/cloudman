@@ -17,16 +17,16 @@ def has_instance(name):
 
 def get_instance_ip(name):
     """Get the external IP for an instance"""
-    vms = list_instances()
+    vms = list_instances(name_only=False)
     for vm in vms:
         if vm['name'] == name:
-            return attr(vm, "networkInterfaces", 0, "accessConfigs", 0, "natIP")
+            return vm["networkInterfaces"][0]["accessConfigs"][0]["natIP"]
 
 
 def delete_instance(name):
     """Delete an instance"""
-    log("Deleting instance '" + name + "'. This may take a while...", prefix=True)
-    return run('compute instances delete ' + name)
+    log("Removing instance '" + name + "'. This may take a while...", prefix=True)
+    return run('compute instances delete ' + name + ' --zone=us-west1-b -q')
 
 
 def create_instance(name, machine, gpu, spot=True):
@@ -34,20 +34,22 @@ def create_instance(name, machine, gpu, spot=True):
     log("Starting an instance for '" + name +
         "' with machine type '" + machine + "' and GPU type '" + gpu + "'")
     # Network, firewall & boot instance name
-    network, _, _ = derive_names(name)
+    network, _, boot = derive_names(name)
     # GPU config
-    gpu_arg = '--accelerator="type={0},count=1"'.format(gpu) if gpu else ''
+    gpu_arg = '' if gpu == 'nogpu' else '--accelerator="type={0},count=1"'.format(
+        gpu)
     # Preemptible config
     spot_arg = '--preemptible' if spot else ''
     # Construct & run the command
-    cmd = """gcloud compute instances create {0} \
+    cmd = """compute instances create {0} \
       --subnet={1} \
       --network-tier=PREMIUM \
+      --zone=us-west1-b \
       --machine-type={2} \
       {3} \
       --no-restart-on-failure \
       --maintenance-policy=TERMINATE \
       --disk=name={4},device-name={5},mode=rw,boot=yes \
       {6} \
-    """.format(name, network, machine, gpu_arg, name, name, spot_arg)
+    """.format(name, network, machine, gpu_arg, boot, boot, spot_arg)
     return run(cmd)

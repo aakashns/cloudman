@@ -12,7 +12,7 @@ def create_firewall(name, network):
     """Create an ingress allow-all firewall with given name"""
     log("Creating allow-all firewall '" + name + "' for network '" +
         network + "'. This may take a while...", prefix=True)
-    return run('compute firewall-rules create ' + name + '--network=' + network +
+    return run('compute firewall-rules create ' + name + ' --network=' + network +
                ' --direction=INGRESS --priority=1000 --action=ALLOW' +
                ' --rules=all --source-ranges=0.0.0.0/0')
 
@@ -25,4 +25,4 @@ def has_firewall(name):
 def delete_firewall(name):
     """Delete a firewall with the given name"""
     log("Deleting firewall '" + name + "'. This may take a while...", prefix=True)
-    return run('compute firewall-rules delete ' + name)
+    return run('compute firewall-rules delete ' + name + ' -q')

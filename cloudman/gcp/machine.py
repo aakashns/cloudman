@@ -7,6 +7,8 @@ def get_gpu(name):
 
     See https://cloud.google.com/compute/docs/gpus/#introduction for a full list.
     """
+    if name == 'nogpu':
+        return name
     if name in GPU_TYPES:
         return "nvidia-tesla-" + name
     raise GCPError("Invalid GPU type '" + name +

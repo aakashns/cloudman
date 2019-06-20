@@ -1,4 +1,3 @@
-import webbrowser
 import subprocess
 import time
 import json
@@ -17,32 +16,9 @@ def has_gcloud():
     return cmd_exists('gcloud')
 
 
-def install_gcloud(force=False, automatic=False, browser=True):
-    """Install the `gcloud` command line tool (aka Google Cloud SDK)"""
-    # Check if gcloud exists
-    if has_gcloud() and not force:
-        log('`gcloud` command line tool is already installed. Skipping...', error=True)
-        log('Tip: Use "--force" to force reinstallation.')
-        return
-
-    if automatic:
-        log('Automatic installation is not implemented yet.\n\nPlease install manually without the "--automatic" flag!', error=True)
-        return
-
-    # Log the URL
-    log('Install gcloud CLI using this link: \n\t' + GCLOUD_SDK_URL)
-    log(POST_INSTALL_MSG)
-
-    # Open browser if requested
-    if browser:
-        log('Opening link in browser...')
-        time.sleep(2)
-        webbrowser.open(GCLOUD_SDK_URL)
-
-
-def _c(cmd):
+def _c(cmd, json_out=True):
     """Helper function to construct commands for the `gcloud` tool"""
-    return 'gcloud ' + cmd + ' --format=json'
+    return 'gcloud ' + cmd + (' --format=json' if json_out else '')
 
 
 def _e(cmd, rc, out):
@@ -50,10 +26,21 @@ def _e(cmd, rc, out):
     return "[cloudman] GCP command '" + _c(cmd) + "'\nfailed with return code '" + str(rc) + "' and output: " + out + "\n"
 
 
-def run(cmd, safe=False):
+def run_plain(cmd):
+    # Log the command
+    log("$ " + cmd, prefix=True)
+    # Create a child process
+    task = subprocess.Popen(cmd, shell=True)
+    # Get the return code
+    _, _ = task.communicate()
+    rc = task.returncode
+    return rc
+
+
+def run(cmd, safe=False, json_out=True):
     """Run a gcloud command"""
     # Log the command
-    log(_c(cmd), prefix=True)
+    log("$ " + _c(cmd, json_out), prefix=True)
     # Create a child process
     task = subprocess.Popen(_c(cmd), shell=True, stdout=subprocess.PIPE)
     # Get the output & return code
@@ -64,20 +51,21 @@ def run(cmd, safe=False):
         rc = -9999
     # Return with code in safe mode
     if safe:
-        return None if out == '' else json.loads(out), rc
+        return None if out == '' else (json.loads(out) if json_out else out), rc
     # Raise error if required
     if rc != 0:
         raise GCPError(_e(cmd, rc, out))
     # Return successful result
-    return json.loads(out)
+    return json.loads(out) if json_out else out
 
 
 def await_ssh(name, max_tries=200, sleep=2):
     """Wait for SSH access to an instance"""
     log('Waiting for SSH access to ' + name + '...', prefix=True)
-    cmd = 'compute ssh ' + name + """ -- "echo 'SSH is ready'"""
+    cmd = 'gcloud compute ssh --zone=us-west1-b ' + \
+        name + """ -- "echo 'SSH is ready'" """
     for i in range(max_tries):
-        _, rc = run(cmd, safe=True)
+        rc = run_plain(cmd)
         if rc == 0:
             return
         time.sleep(sleep)
@@ -88,6 +76,6 @@ def await_ssh(name, max_tries=200, sleep=2):
 def derive_names(name):
     """Get name of network, firewall & boot instance from boot disk"""
     network = name + '-network'
-    firewall = name + '-network-firewall-allow-all'
-    boot_instance = name + '-boot-instance'
-    return network, firewall, boot_instance
+    firewall = name + '-firewall-allow-all'
+    boot = name + '-boot'
+    return network, firewall, boot
