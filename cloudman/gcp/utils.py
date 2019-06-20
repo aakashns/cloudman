@@ -77,5 +77,5 @@ def derive_names(name):
     """Get name of network, firewall & boot instance from boot disk"""
     network = name + '-network'
     firewall = name + '-firewall-allow-all'
-    boot = name + '-boot'
+    boot = name
     return network, firewall, boot

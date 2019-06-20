@@ -107,8 +107,6 @@ To see the available boot disks and running instances, run
 cloudman list
 ```
 
-Note that boot disks have the suffix `-boot` added to the name that was provided during creation.
-
 ### Delete a boot disk
 
 To delete a boot disk, run
