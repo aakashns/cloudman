@@ -25,6 +25,9 @@ source activate fastai
 conda install -y -c pytorch -c fastai fastai
 conda install -y ipykernel
 
+pip install kaggle --upgrade 
+pip install jovian --upgrade --no-cache
+
 python -m ipykernel install --user --name fastai --display-name "fastai"
 
 ## Install the start script (to run Jupyter as a service)

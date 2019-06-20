@@ -27,6 +27,9 @@ class CLI(object):
     def ssh(self, name):
         gcp.ssh(name)
 
+    def jupyter(self, name):
+        gcp.launch_jupyter(name)
+
 
 def main():
     print('')

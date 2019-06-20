@@ -116,3 +116,20 @@ def delete(name):
 def ssh(name):
     """SSH into the given machine"""
     run_plain('gcloud compute ssh ' + name + ' --zone=us-west1-b')
+
+
+def launch_jupyter(name):
+    """Launch Jupyter notebook for the given machine"""
+    if not has_instance(name):
+        # Log and skip
+        log("Compute instance for '" +
+            name + "' is not running. Skipping.. ", prefix=True)
+        log("Use 'cloudman create " + name +
+            "' to start an instance.", prefix=True)
+        return
+    # Print Jupyter URL
+    ext_ip = get_instance_ip(name)
+    jupyter_url = "http://" + ext_ip + ":8080"
+    log("Access Jupyter notebook here: " + jupyter_url)
+    # Launch webbrowser
+    webbrowser.open(jupyter_url)
