@@ -24,7 +24,7 @@ POST_INSTALL_MSG = """After installation:
 DEFAULT_BOOT_CONFIG = {
     'disk': '50GB',
     'os': "ubuntu-1804-lts",
-    'setup-script-url': "https://raw.githubusercontent.com/arunoda/fastai-shell/master/setup-gce.sh"
+    'setup-script-url': "https://raw.githubusercontent.com/aakashns/cloudman/master/cloudman/setup-scripts/gcp-ubutnu-nvidia410-fastai.sh"
 }
 
 MACHINE_TYPES = [
