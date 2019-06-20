@@ -115,4 +115,4 @@ def delete(name):
 
 def ssh(name):
     """SSH into the given machine"""
-    run('compute ssh ' + name + ' --zone=us-west1-b')
+    run_plain('gcloud compute ssh ' + name + ' --zone=us-west1-b')
