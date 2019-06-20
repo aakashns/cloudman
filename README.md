@@ -91,6 +91,14 @@ If machine type is set to 'auto', the tool automatically picks a reasonable mach
 
 Once started, you can use the link to access the Jupyter server. Sometimes it may take a minute or two for the Jupyter server to start.
 
+### SSH into running instance
+
+To SSH into a running instance use:
+
+```
+cloudman ssh jigsaw-ulmfit
+```
+
 ### Stop an instance
 
 Use the `cloudman stop` command to stop a running instance. Example:

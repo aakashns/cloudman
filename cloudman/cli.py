@@ -24,6 +24,9 @@ class CLI(object):
     def stop(self, name):
         gcp.stop(name)
 
+    def ssh(self, name):
+        gcp.ssh(name)
+
 
 def main():
     print('')

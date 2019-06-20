@@ -5,7 +5,7 @@ from cloudman.gcp.network import create_network, delete_network, has_network
 from cloudman.gcp.firewall import create_firewall, delete_firewall, has_firewall
 from cloudman.gcp.disk import has_disk, delete_disk
 from cloudman.gcp.instance import has_instance, delete_instance, create_instance, get_instance_ip
-from cloudman.gcp.utils import derive_names, has_gcloud, run_plain
+from cloudman.gcp.utils import derive_names, has_gcloud, run_plain, run
 from cloudman.gcp.constants import POST_INSTALL_MSG, GCLOUD_SDK_URL, DEFAULT_BOOT_CONFIG
 from cloudman.utils.logger import log
 from cloudman.gcp.machine import resolve_gpu_machine
@@ -111,3 +111,8 @@ def delete(name):
     # Delete network
     if has_network(network):
         delete_network(network)
+
+
+def ssh(name):
+    """SSH into the given machine"""
+    run('compute ssh ' + name + ' --zone=us-west1-b')
