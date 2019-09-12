@@ -12,7 +12,7 @@ class GCPError(Exception):
 
 
 def has_gcloud():
-    """Check if gcloud CLI exists on sytem PATH"""
+    """Check if gcloud CLI exists on system PATH"""
     return cmd_exists('gcloud')
 
 
@@ -22,7 +22,7 @@ def _c(cmd, json_out=True):
 
 
 def _e(cmd, rc, out):
-    """Helper functon to show errors for failed GCP commands"""
+    """Helper function to show errors for failed GCP commands"""
     return "[cloudman] GCP command '" + _c(cmd) + "'\nfailed with return code '" + str(rc) + "' and output: " + out + "\n"
 
 
