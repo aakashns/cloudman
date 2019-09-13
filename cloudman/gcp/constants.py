@@ -2,7 +2,7 @@ GCLOUD_SDK_URL = 'https://cloud.google.com/sdk/docs/downloads-interactive'
 
 POST_INSTALL_MSG = """After installation:
 
-1. Make sure the `gloud` command is added to your PATH.
+1. Make sure the `gcloud` command is added to your PATH.
 
 2. Connect the `gcloud` tool your GCP account by running:
     gcloud init

@@ -18,6 +18,18 @@ Install the `cloudman` package using `pip`.
 pip install cloudman
 ```
 
+> **Note**: If you get a `Permission denied` error, try installing with sudo permission (on Linux/Mac).
+>
+> ```
+> $ sudo pip install cloudman
+> ```
+>
+> Another alternative is to try installing with the `--user` flag, but you'll need to ensure that the target directory is added to your system `PATH`.
+>
+> ```
+> $ pip install cloudman --user
+> ```
+
 `cloudman` requires the `gcloud` command line tool to be installed. Make sure to complete these steps before moving forward.
 
 1. Install `gcloud` CLI using this link: https://cloud.google.com/sdk/docs/downloads-interactive
@@ -99,6 +111,14 @@ To SSH into a running instance use:
 cloudman ssh jigsaw-ulmfit
 ```
 
+> **Caution**: **Setup password for your Jupyter Notebook**
+>
+> ```
+> $ jupyter notebook password
+> ```
+>
+> visit [this](https://jupyter-notebook.readthedocs.io/en/stable/public_server.html#securing-a-notebook-server) for more details.
+
 ### Stop an instance
 
 Use the `cloudman stop` command to stop a running instance. Example:
@@ -123,4 +143,4 @@ To delete a boot disk, run
 cloudman delete jigsaw-ulmfit
 ```
 
-This will stop any running instances and delte the boot disk complete. All your data will be lost, so be careful while using this.
+This will stop any running instances and delete the boot disk complete. All your data will be lost, so be careful while using this.
